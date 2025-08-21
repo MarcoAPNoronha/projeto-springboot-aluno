@@ -1,0 +1,54 @@
+Client (web ou mobile) faz a requisição (EX.: GET aluno);
+
+------------------------------------------------------------------------------------
+
+Controller recebe e/ou devolve a solicitação
+- Classe: AlunoController
+- Métodos: GET (do CRUD)
+
+------------------------------------------------------------------------------------
+
+Service tem as regras de negócio da empresa, filtra os dados para obter o resultado do GET
+- classe: AlunoService
+- métodos: filtrarAluno // listarAluno (chama o método na Repository)
+-- implementação de método de pesquisa
+
+------------------------------------------------------------------------------------
+
+Repository pode ter métodos com mesmo nome da Service
+- Classe: AlunoRepository
+- filtrarAluno: faz o (Select * from) no banco de dados
+
+------------------------------------------------------------------------------------
+
+Entity / Model guarda os dados propriamento ditos / tabela de banco de dados
+- Métodos: get/set (private class)
+class Aluno {
+
+id;
+nome;
+cpf;
+dataNasc;
+email;
+senha;
+}
+
+------------------------------------------------------------------------------------
+
+DTO (Data Trasnfer Object):
+- Métodos: get/set (private class)
+- Manipula quais campos serão exibidos/enviados para o Client
+- Tipo uma LS sem todos os campos da tabela
+class AlunoDTO {
+
+nome;
+email;
+}
+
+------------------------------------------------------------------------------------
+
+Sequencia recomendada: implementar da Entity PARA a Controller
+
+
+
+
