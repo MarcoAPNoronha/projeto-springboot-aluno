@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 
 import java.util.Date;
 
+//---------------------------------------------------------------------
+
 @Entity
 public class Aluno {
 
@@ -16,8 +18,40 @@ public class Aluno {
     private String nome;
     private Date dataNasc;
     private String email;
+    private String bio;
     private String senha;
 
+    //---------------------------------------------------------------------
+
+    public Aluno() {
+    }
+
+
+    public Aluno(Long id, String email, String senha) {
+        this.id = id;
+        this.email = email;
+        this.senha = senha;
+    }
+
+
+    public Aluno(Long id, String nome, Date dataNasc, String email, String bio, String senha) {
+        this.id = id;
+        this.nome = nome;
+        this.dataNasc = dataNasc;
+        this.email = email;
+        this.bio = bio;
+        this.senha = senha;
+    }
+
+    //---------------------------------------------------------------------
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 
     public Long getId() {
         return id;
@@ -59,6 +93,6 @@ public class Aluno {
         this.senha = senha;
     }
 
-
+//---------------------------------------------------------------------
 
 }
