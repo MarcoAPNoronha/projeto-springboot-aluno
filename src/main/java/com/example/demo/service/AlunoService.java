@@ -53,18 +53,17 @@ public class AlunoService {
                     aluno.setEmail((updateAluno.getEmail()));
                     aluno.setDataNasc(updateAluno.getDataNasc());
                     aluno.setSenha(updateAluno.getSenha());
+                    aluno.setEndereco(updateAluno.getEndereco());
 
                     Aluno alunoSaved = alunoRepository.save(aluno);
                     return toAlunoDTO(alunoSaved);
-                }).orElseThrow(() -> new RuntimeException("Aluno não existe"));
-
-
+                }).orElseThrow(() -> new RuntimeException("Aluno não existe")
+        );
     }
 
 
-
     private AlunoDTO toAlunoDTO(Aluno aluno){
-        return new AlunoDTO(aluno.getId(), aluno.getNome(), aluno.getEmail());
+        return new AlunoDTO(aluno.getId(), aluno.getNome(), aluno.getEmail(), aluno.getEndereco());
     }
 
 
