@@ -18,40 +18,54 @@ public class AlunoService {
     private AlunoRepository alunoRepository;
 
 
-    private List<Aluno> findAllAlunos(){
+    public List<AlunoDTO> findAllAlunos(){
         //return de Lista pode existir vazio
-        return alunoRepository.findAll();
+        return alunoRepository.findAll().
+                stream()
+                .map(this::toAlunoDTO)
+                .toList();
     }
 
 
-    private Optional<Aluno> findAlunoById(Long id){
-        //return de objeto único precisa não pode ser vazio, pro caso de não achar.
+    public Optional<AlunoDTO> findAlunoById(Long id){
+        //return de objeto único pode ser vazio, pro caso de não achar.
         //Por isso o uso de Optional
-        return alunoRepository.findById(id);
+        return alunoRepository.findById(id).
+                map(this::toAlunoDTO);
     }
 
 
-    private Aluno saveAluno(Aluno aluno){
-        return alunoRepository.save(aluno);
+    public AlunoDTO saveAluno(Aluno aluno){
+        Aluno alunoSaved = alunoRepository.save(aluno);
+        return toAlunoDTO(alunoSaved);
     }
 
 
-    private void deleteAluno(Long id){
+    public void deleteAluno(Long id){
         alunoRepository.deleteById(id);
     }
 
 
-    private Aluno updateAluno(Long id, Aluno updateAluno){
+    public AlunoDTO updateAluno(Long id, Aluno updateAluno){
         return alunoRepository.findById(id)
                 .map(aluno -> {
                     aluno.setNome(updateAluno.getNome());
                     aluno.setEmail((updateAluno.getEmail()));
                     aluno.setDataNasc(updateAluno.getDataNasc());
                     aluno.setSenha(updateAluno.getSenha());
-                    return alunoRepository.save(aluno);
+
+                    Aluno alunoSaved = alunoRepository.save(aluno);
+                    return toAlunoDTO(alunoSaved);
                 }).orElseThrow(() -> new RuntimeException("Aluno não existe"));
 
 
     }
+
+
+
+    private AlunoDTO toAlunoDTO(Aluno aluno){
+        return new AlunoDTO(aluno.getId(), aluno.getNome(), aluno.getEmail());
+    }
+
 
 }
