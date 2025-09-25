@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -19,7 +20,8 @@ public class Endereco {
     private String cep;
 
     @OneToOne
-    @JoinColumn(name = "aluno_id", referencedColumnName = "id")
+    @JoinColumn(name = "aluno_id", referencedColumnName = "id") //Chave estrangeira
+    @JsonIgnore
     private Aluno aluno;
 
     //---------------------------------------------------------------------
