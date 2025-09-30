@@ -18,9 +18,13 @@ public class Aluno {
     private String bio;
     private String senha;
 
+
     @OneToOne(mappedBy = "aluno", cascade = CascadeType.ALL) // Um para um com Endereco
     @JoinColumn(name = "endereco_id", referencedColumnName = "id") //Chave estrangeira
     private Endereco endereco;
+
+
+
 
     //---------------------------------------------------------------------
 
