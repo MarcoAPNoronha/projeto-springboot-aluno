@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 //---------------------------------------------------------------------
 
@@ -18,9 +19,29 @@ public class Aluno {
     private String bio;
     private String senha;
 
+
     @OneToOne(mappedBy = "aluno", cascade = CascadeType.ALL) // Um para um com Endereco
     @JoinColumn(name = "endereco_id", referencedColumnName = "id") //Chave estrangeira
     private Endereco endereco;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "aluno_curso",
+            joinColumns = @JoinColumn(name = "aluno_id"), //Recebe 2 chaves, por isso no plural
+            inverseJoinColumns = @JoinColumn(name = "curso_id") //Inverse para chave estranegira
+    )
+    private List<Curso> cursos;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "aluno_disciplina",
+            joinColumns = @JoinColumn(name = "aluno_id"),
+            inverseJoinColumns = @JoinColumn(name = "disciplinas_id")
+    )
+    private List<Disciplina> disciplinas;
+
 
     //---------------------------------------------------------------------
 
@@ -100,6 +121,22 @@ public class Aluno {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
+
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
     }
 
     //---------------------------------------------------------------------

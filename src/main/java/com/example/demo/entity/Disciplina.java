@@ -1,0 +1,75 @@
+package com.example.demo.entity;
+
+
+import jakarta.persistence.*;
+
+import java.util.List;
+
+
+@Entity
+public class Disciplina {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nome;
+    private int cargaHoraria;
+    private int creditos;
+
+    @ManyToMany(mappedBy = "disciplinas")
+    private List<Aluno> alunos;
+
+
+    public Disciplina(Long id, String nome, int cargaHoraria, int creditos) {
+        this.id = id;
+        this.nome = nome;
+        this.cargaHoraria = cargaHoraria;
+        this.creditos = creditos;
+    }
+
+
+    public Disciplina() {
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getCargaHoraria() {
+        return cargaHoraria;
+    }
+
+    public void setCargaHoraria(int cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
+    }
+
+    public int getCreditos() {
+        return creditos;
+    }
+
+    public void setCreditos(int creditos) {
+        this.creditos = creditos;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+}
