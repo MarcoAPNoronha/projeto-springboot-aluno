@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
-    Optional<Endereco> findAlunoId(Long alunoId); //Procura pelo endereço do aluno e retorna o endereço
+    Optional<Endereco> findAlunoById(Long alunoId); //Procura pelo endereço do aluno e retorna o endereço
 }

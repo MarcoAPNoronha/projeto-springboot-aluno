@@ -54,7 +54,7 @@ public class EnderecoService {
                 .orElseThrow(() -> new RuntimeException("Aluno não existe"));
 
 
-        Endereco enderecoAtual = enderecoRepository.findAlunoId(alunoId)
+        Endereco enderecoAtual = enderecoRepository.findAlunoById(alunoId)
                 .orElseThrow(() -> new RuntimeException("Endereço não existe"));
 
         enderecoAtual.setLogradouro(novoEndereco.getLogradouro());

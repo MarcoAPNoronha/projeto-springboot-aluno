@@ -1,6 +1,10 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import org.aspectj.bridge.IMessage;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 import java.util.List;
@@ -13,10 +17,22 @@ public class Aluno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //ID único para cada objeto
     private Long id;
+
+    @NotBlank(message = "Nome é obrigatório")
     private String nome;
+
+    @NotNull
     private Date dataNasc;
+
+    @Email(message = "Email inválido")
+    @NotBlank(message = "Campo email é obrigatório")
+    @Column(nullable = false, unique = true)
     private String email;
+
+
     private String bio;
+
+    @NotBlank(message = "Senha obrigatória")
     private String senha;
 
 
@@ -38,7 +54,7 @@ public class Aluno {
     @JoinTable(
             name = "aluno_disciplina",
             joinColumns = @JoinColumn(name = "aluno_id"),
-            inverseJoinColumns = @JoinColumn(name = "disciplinas_id")
+            inverseJoinColumns = @JoinColumn(name = "disciplina_id")
     )
     private List<Disciplina> disciplinas;
 
@@ -56,7 +72,7 @@ public class Aluno {
     }
 
 
-    public Aluno(Long id, String nome, Date dataNasc, String email, String bio, String senha) {
+    public Aluno(Long id, String nome, @NotNull Date dataNasc, String email, String bio, String senha) {
         this.id = id;
         this.nome = nome;
         this.dataNasc = dataNasc;
